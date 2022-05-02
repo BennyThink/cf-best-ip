@@ -104,8 +104,10 @@ def run_tester():
     v4_list = random.sample(v4_list, 5)
     v6_list = random.sample(v6_list, 5)
     # test v4
-    with contextlib.suppress(Exception):
+    try:
         list(tqdm(executor.map(test_download_speed, v4_list, timeout=TIMEOUT), total=len(v4_list)))
+    except Exception as e:
+        logging.error("Test timeout for %s", e)
     result.sort(key=lambda x: x['speed'], reverse=True)
 
     for item in result:
@@ -116,8 +118,10 @@ def run_tester():
     table.rows.append(["", "", ""])
 
     # test v6
-    with contextlib.suppress(Exception):
+    try:
         list(tqdm(executor.map(test_download_speed, v6_list), total=len(v4_list)))
+    except Exception as e:
+        logging.error("Test timeout for %s", e)
     result.sort(key=lambda x: x['speed'], reverse=True)
 
     for item in result:
