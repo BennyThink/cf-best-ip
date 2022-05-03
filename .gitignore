@@ -134,3 +134,8 @@ dmypy.json
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/vcs.xml
 /.idea/.gitignore
+/external/CloudflareST
+/external/cfst_hosts.sh
+/external/ip.txt
+/external/ipv6.txt
+/external/使用+错误+反馈说明.txt

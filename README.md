@@ -1,6 +1,6 @@
 # cf-best-ip
 
-Intended for cloudfwared
+Intended for cloudflared
 
 # Installation
 
