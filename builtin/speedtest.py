@@ -84,7 +84,7 @@ def run_tester():
         logging.error("Test timeout for %s", e)
     result.sort(key=lambda x: x['speed'], reverse=True)
 
-    fastest_ipv4 = result[0] if result else None
+    ipv4 = result.copy()
 
     result.clear()
 
@@ -95,8 +95,6 @@ def run_tester():
         logging.error("Test timeout for %s", e)
     result.sort(key=lambda x: x['speed'], reverse=True)
 
-    fastest_ipv6 = result[0] if result else None
+    ipv6 = result.copy()
 
-    logging.info("Fastest IPv4: %s", fastest_ipv4)
-    logging.info("Fastest IPv6: %s", fastest_ipv6)
-    return fastest_ipv4, fastest_ipv6
+    return ipv4, ipv6

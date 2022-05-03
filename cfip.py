@@ -34,7 +34,7 @@ def draw_table(results):
     print(table)
 
 
-def update_hosts():
+def update_hosts(v4, v6):
     logging.info("Changing hosts...")
     old_hosts = open("/etc/hosts").read()
     new_hosts = ""
@@ -43,9 +43,9 @@ def update_hosts():
             new_hosts += i + "\n"
     v4_entry = v6_entry = ""
     if v4:
-        v4_entry = f"{v4['ip']} {host}"
+        v4_entry = f"{v4[0]['ip']} {host}"
     if v6:
-        v6_entry = f"{v6['ip']} {host}"
+        v6_entry = f"{v6[0]['ip']} {host}"
     new_entry = f"{v4_entry}\n{v6_entry}"
     new_hosts += new_entry
     with open("/etc/hosts", "w") as f:
@@ -71,14 +71,14 @@ if __name__ == '__main__':
         sys.exit(1)
 
     if runner == "external":
-        v4, v6 = external_tester()
+        ipv4, ipv6 = external_tester()
     else:
-        v4, v6 = builtin_tester()
+        ipv4, ipv6 = builtin_tester()
 
-    draw_table(v4 + v6)
+    draw_table(ipv4 + ipv6)
 
     if save:
-        update_hosts()
+        update_hosts(ipv4, ipv6)
 
     if service:
         restart_service()
